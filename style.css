@@ -16,10 +16,16 @@ body {
 
 .container {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 3em;
   gap: 2em;
+}
+
+table {
+  border-collapse: collapse;
+  width: 55em;
 }
 
 thead,
@@ -35,12 +41,11 @@ td {
   display: flex;
   flex-direction: column;
   gap: 1em;
-  align-items: left;
+  align-items: center;
 }
 
 .form button {
-  max-width: 12em;
-  padding: 0.3em 0;
+  padding: 0.3em 3em;
   border-radius: 10px;
 }
 
