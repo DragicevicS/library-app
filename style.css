@@ -1,0 +1,32 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+body {
+  text-align: center;
+  height: 100vh;
+  width: 100%;
+  padding: 3em;
+  background-color: rgb(44, 43, 43);
+  color: beige;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 3em;
+  gap: 2em;
+}
+
+thead,
+tbody,
+th,
+tr,
+td {
+  border: solid 1px white;
+  padding: 1em;
+}
