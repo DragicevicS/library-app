@@ -30,3 +30,47 @@ td {
   border: solid 1px white;
   padding: 1em;
 }
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  align-items: left;
+}
+
+.form button {
+  max-width: 12em;
+  padding: 0.3em 0;
+  border-radius: 10px;
+}
+
+#addBookForm {
+  display: grid;
+  grid-template: repeat(5, 2rem) / minmax(9em, 1fr) minmax(15em,3fr);
+  gap: 0.5em 1em;
+  justify-items: right;
+  align-items: center;
+}
+
+#addBookForm input[type='text'],
+#addBookForm input[type='number'] {
+  padding: 7px;
+  width: 100%;
+  border-radius: 10px;
+}
+
+.radio {
+  display: flex;
+  gap: 2em;
+}
+
+.submit {
+  grid-column: span 2;
+  display: flex;
+  justify-content: center;
+}
+
+#submit {
+  padding: 0.2em 3em;
+  border-radius: 5px;
+}
