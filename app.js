@@ -1,27 +1,26 @@
 const myLibrary = [];
 
-//constructor for 'Book' object
+// constructor for 'Book' object
 function Book(title, author, pages, read) {
   this.title = title;
   this.author = author;
   this.pages = pages;
-  if (read == true) this.read = 'read';
-  if (read == false) this.read = 'not read'
+  this.read = read;
 }
 
-//manually adding few books
+// manually adding few books
 function addBookToLibrary() {
   myLibrary.push(...arguments);
   console.log(myLibrary);
 }
 
-const hobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 296, false);
-const got = new Book('A Game of Thrones', 'George R.R. Martin', 245, true);
-const harryPotter = new Book('Harry Potter', 'J.K. Rowling', 233, false);
+const hobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 296, 'not read');
+const got = new Book('A Game of Thrones', 'George R.R. Martin', 245, 'read');
+const harryPotter = new Book('Harry Potter', 'J.K. Rowling', 233, 'not read');
 
 addBookToLibrary(hobbit, got, harryPotter);
 
-//using loop to list all the books in the 'myLibrary' array
+// using loop to list all the books in the 'myLibrary' array
 const tableBody = document.querySelector('tbody');
 
 for (let i=0; i < myLibrary.length; i++) {
@@ -40,7 +39,7 @@ for (let i=0; i < myLibrary.length; i++) {
   `;
 };
 
-//removing table row button
+// removing table row button
 function removeRow(e) {
   if (!e.target.classList.contains("remove")) return;
   e.target.closest('tr').remove();
@@ -48,16 +47,14 @@ function removeRow(e) {
 
 tableBody.addEventListener('click', removeRow);
 
-//toggle read button
-const tdRead = document.querySelector('.read');
-function toggleRead(e) {
-  if (!e.target.classList.contains("toggle")) return;
-  console.log(e);
-};
+// toggle read button
+// needs to be implemented
+
+
 
 tableBody.addEventListener('click', toggleRead);
 
-//toggle form visibility 
+// toggle form visibility 
 const toggleForm = document.querySelector('#toggleForm');
 const form = document.querySelector('#addBookForm')
 toggleForm.addEventListener('click', () => {
@@ -70,7 +67,7 @@ toggleForm.addEventListener('click', () => {
   };
 })
 
-//adding new 'book' to the 'myLibrary' array
+// adding new 'book' to the 'myLibrary' array
 function addNewBook(e) {
   e.preventDefault();
   const title = document.getElementById('title').value;
