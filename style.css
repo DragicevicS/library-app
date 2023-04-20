@@ -30,10 +30,14 @@ table {
 
 thead,
 tbody,
-th,
 tr,
 td {
   border: solid 1px white;
+  padding: 1em;
+}
+
+th {
+  border: solid 3px white;
   padding: 1em;
 }
 

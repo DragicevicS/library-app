@@ -1,10 +1,10 @@
 const table = document.querySelector('.table');
 const tableBody = document.querySelector('tbody');
 
-class Library {
+class Library { // create Library class
   constructor(element) {
-    this.elementList = element;
-    this.bookList = [
+    this.elementList = element; // select element for displaying the list
+    this.bookList = [ // array of list items (objects)
       {
       title: 'The Hobbit', 
       author: 'J.R.R. Tolkien',
@@ -26,17 +26,7 @@ class Library {
     ];
   }
 
-  createNewBook(title, author, pages, read) {
-    const book = {
-      title,
-      author,
-      pages,
-      read
-    };
-    return this.bookList.push(book);
-  }
-
-  static createListItem(book) {
+  static createListItem(book) { // adding a table row for the list item
      const tr = document.createElement('tr');
      tr.innerHTML += 
     `
@@ -53,22 +43,23 @@ class Library {
     return tr;
   }
 
-  update() {
+  update() { // removing every row, then adding again (refresh)
     while (this.elementList.firstChild) {
       this.elementList.removeChild(this.elementList.firstChild);
     };
-    
-    
+     
     for (let i=0; i < this.bookList.length; i++) {
       this.elementList.appendChild(Library.createListItem(this.bookList[i]));
       const index = document.querySelectorAll('.index');
       const remove = document.querySelectorAll('.remove');
+      const toggle = document.querySelectorAll('.toggle');
       index[i].textContent = i+1;
-      remove[i].setAttribute('id', index[i].textContent);
+      remove[i].classList.add(index[i].textContent); // adding a number to the class for later use in removeBook() function
+      toggle[i].classList.add(index[i].textContent); // adding a number to the class for later use in toggleRead() function
     };
   }
 
-  add(title, author, pages, read){
+  add(title, author, pages, read){ // creating a book object and adding it to the bookList array
     const book = {
       title,
       author,
@@ -79,17 +70,22 @@ class Library {
     this.update();
   }
 
-  remove(index) {
+  remove(index) { // removing the book object from the array
     this.bookList.splice(index, 1);
     this.update();
   }
-}
 
-const tableList = new Library(tableBody);
+  changeRead(index) { // toggle read status for display and also the book object
+    this.bookList[index].read = this.bookList[index].read === 'read' ? 'not read' : 'read';
+    this.update();
+  }
+};
+
+const tableList = new Library(tableBody); // using the table body as the list display
 
 const form = document.querySelector('#addBookForm');
 
-function addNewBook(e) {
+function addNewBook(e) { // getting values from the form 
   e.preventDefault();
   const title = document.getElementById('title').value;
   const author = document.getElementById('author').value;
@@ -105,15 +101,15 @@ function addNewBook(e) {
 
 form.addEventListener('submit', addNewBook);
 
-function removeBook(e) {
+function removeBook(e) { // removing rows from display and also from the array using button id
   if (!e.target.classList.contains('remove')) return;
-  tableList.remove(e.target.id-1);
-}
+  tableList.remove(e.target.classList[1]-1);
+};
 
 tableBody.addEventListener('click', removeBook);
 
 const toggleForm = document.querySelector('#toggleForm');
-toggleForm.addEventListener('click', () => {
+toggleForm.addEventListener('click', () => { // toggle display showing form or the table
   if (form.style.display == 'none') {
     table.style.display = 'none';
     form.style.display = 'grid';
@@ -126,3 +122,9 @@ toggleForm.addEventListener('click', () => {
 });
 
 tableList.update();
+
+function toggleRead(e) { // changing read status on table display
+    if (!e.target.classList.contains('toggle')) return;
+    tableList.changeRead(e.target.classList[1]-1);
+};
+tableBody.addEventListener('click', toggleRead);
